@@ -1,0 +1,9 @@
+src/*
+test/*
+spec/*
+dist/webpack.*
+dist/src/*
+.vscode/*
+index.html
+tsconfig.json
+webpack.config.js
