@@ -89,6 +89,9 @@ export class ManaNativeService implements ITheSManaLibProvider {
         this.onOptionSelected = fn;
         return this.callNativeFunc('initOptionDialog', JSON.stringify({ mcid: mcid }));
     }
+    setGpsSection(address: string, latitude: string, longitude: string, phoneNumber: string, remark: string) {
+        this.callAppMethod('setGpsSection', JSON.stringify({ address: address, latitude: latitude, longitude: longitude, phoneNumber: phoneNumber, remark: remark }));
+    }
 
     private callAppMethod(fName: string, fParam: any) {
         return new Promise((resolve, reject) => {
