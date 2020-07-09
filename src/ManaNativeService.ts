@@ -92,6 +92,9 @@ export class ManaNativeService implements ITheSManaLibProvider {
     setGpsSection(address: string, latitude: string, longitude: string, phoneNumber: string, remark: string) {
         this.callAppMethod('setGpsSection', JSON.stringify({ address: address, latitude: latitude, longitude: longitude, phoneNumber: phoneNumber, remark: remark }));
     }
+    getGpsLocation(mcid: string):Promise<any>{
+        return this.callNativeFunc('getGpsLocation', JSON.stringify({mcid: mcid}));
+    }
 
     private callAppMethod(fName: string, fParam: any) {
         return new Promise((resolve, reject) => {

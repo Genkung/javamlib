@@ -145,6 +145,10 @@ export class ManaRestService implements ITheSManaLibProvider {
     setGpsSection(address: string, latitude: string, longitude: string, phoneNumber: string, remark: string) {
         console.log("setGpsSection")
     }
+    getGpsLocation(mcid:string):Promise<any>{
+        console.log("getGpsLocation")
+        return new Promise<any>(() => { });
+    }
 
     private executeCallBackFunc() {
         if (this.callBackFunc) {
