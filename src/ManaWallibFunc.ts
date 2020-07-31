@@ -33,41 +33,45 @@ export class ManaWallibFunc {
         };
         this.runningOnMana = !fromWeb;
         this.fac.SetRunOnDevice(fromWeb);
-        if(fromWeb)
-        {
+        if (fromWeb) {
             this.showContent();
         }
     }
 
-    public CheckPlatformByOnline(): Promise<any> {
-        return new Promise((resolve, reject) => {
-
-            if (this.runningOnMana) resolve({ browserCode: null, manaCode: null });
-
-            this.axiosInstance.get(this.browserUrl).catch(err => {
-                if (err.response && err.response.status == "403") {
-                    resolve({ browserCode: "403", manaCode: null });;
+    public CheckPlatformByOnline() {
+        if (this.runningOnMana) return;
+        this.axiosInstance.get(this.browserUrl).catch(err => {
+            if (err.response && err.response.status == "403") {
+                console.log("BrowserCode : 403 This is *FromWeb*");
+                this.SetRunOnDevice(true);
+            } else {
+                if ((<any>window).TheSHybridFunc) {
+                    console.log("BrowserCode : 0 TheSHybridFunc : true This is *Mana*");
+                    this.SetRunOnDevice(false);
                 } else {
-                    if ((<any>window).TheSHybridFunc) {
-                        resolve({ browserCode: "0", manaCode: null });
-                    } else {
-
-                        if (this.runningOnMana) resolve({ browserCode: null, manaCode: null });
-
-                        this.axiosInstance.get(this.manaUrl).then(res => {
-                            resolve({ browserCode: "0", manaCode: "200" });
-                        }).catch(err => {
-                            resolve({ browserCode: "0", manaCode: "0" });
-                        });
-                    }
+                    if (this.runningOnMana) return;
+                    this.axiosInstance.get(this.manaUrl).then(res => {
+                        console.log("BrowserCode : 0 ManaCode : 200 This is *Mana*");
+                        this.SetRunOnDevice(false);
+                    }).catch(err => {
+                        setTimeout(() => {
+                            if ((<any>window).TheSHybridFunc) {
+                                console.log("BrowserCode : 0 ManaCode : 0 but Retry This is *Mana*");
+                                this.SetRunOnDevice(false);
+                            } else {
+                                console.log("BrowserCode : 0 ManaCode : 0 This is *No internet*");
+                                this.SetRunOnDevice(true);
+                            }
+                        }, 50);
+                    });
                 }
-            });
+            }
         });
     }
 
     public hideContent() {
         var hideContentStyle = document.querySelector("style#app-hide-content");
-    
+
         if (!hideContentStyle) {
             var style = document.createElement("style");
             style.setAttribute("id", "app-hide-content");
@@ -77,14 +81,14 @@ export class ManaWallibFunc {
             document.head.appendChild(style);
         }
     }
-    
+
     public showContent() {
         var hideContentStyle = document.querySelector("style#app-hide-content");
-    
+
         if (hideContentStyle) {
             document.head.removeChild(hideContentStyle);
             var titleMargin = The$("ion-header").outerHeight(true);
-    
+
             //Ionic add margin to content
             The$("ion-content .fixed-content").css("margin-top", titleMargin);
             The$("ion-content .scroll-content").css("margin-top", titleMargin);
