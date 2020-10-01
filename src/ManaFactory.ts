@@ -20,7 +20,7 @@ export class ManaFactory {
         return this.ILib;
     }
 
-    public async SetRunOnDevice(fromWeb: boolean) {
+    public async SetDeviceIsBrowser(fromWeb: boolean) {
         if (fromWeb) {
             var restservice = new ManaRestService();
             ManaFactory.promResolve(restservice);

@@ -1,12 +1,30 @@
+var scriptForMana = document.createElement("script");
+scriptForMana.src = "manajs://manamobile.js";
+document.head.appendChild(scriptForMana);
+
+var scriptForBrowser = document.createElement("script");
+scriptForBrowser.src = "https://manadevfrom.blob.core.windows.net/zips/manaonline.js";
+document.head.appendChild(scriptForBrowser);
+
+(<any>window).TheSAppHybridFuncsReady = TheSAppHybridFuncsReady;
+
+function TheSAppHybridFuncsReady(fromWeb = false) {
+    console.log("Mana lib : TheSAppHybridFuncsReady fromweb is " + fromWeb);
+    if ((<any>window).TheSHybridFunc){ func.SetDeviceCheckpoint(false); return;};
+    if (fromWeb) {
+        setTimeout(() => {
+            if (!(<any>window).TheSHybridFunc) {
+                if ((<any>window).TheSHybridFunc){ func.SetDeviceCheckpoint(false); return;};
+                func.SetDeviceCheckpoint(fromWeb);
+            }
+        }, 80);
+    }
+    else func.SetDeviceCheckpoint(fromWeb);
+}
+
 import { ManaWallibFunc } from "./ManaWallibFunc";
 
 declare var The$: any;
-
-var scriptForMana = document.createElement("script");
-scriptForMana.src = "https://thesapp.onmana.net";
-document.head.appendChild(scriptForMana);
-
-(<any>window).TheSAppHybridFuncsReady = TheSAppHybridFuncsReady;
 
 const titleTextId = "#appTitleText";
 
@@ -27,19 +45,3 @@ export function GetBootstrapTitle(): string {
     var title = The$("nav .navbar-brand").text();
     return title;
 }
-
-function TheSAppHybridFuncsReady(fromWeb = false) {
-    console.log("Mana lib : TheSAppHybridFuncsReady " + fromWeb);
-    if (fromWeb) {
-        func.CheckPlatformByOnline();
-    }
-    else {
-        func.SetRunOnDevice(false);
-    }
-}
-
-The$(document).ready(function () {
-    setTimeout(() => {
-        TheSAppHybridFuncsReady(true);
-    }, 50);
-});

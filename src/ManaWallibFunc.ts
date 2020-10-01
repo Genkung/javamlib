@@ -1,19 +1,13 @@
 import { ManaFactory } from "./ManaFactory";
-import axios, { AxiosInstance } from "axios";
 
 declare var The$: any;
 
 export class ManaWallibFunc {
     private titleBarId = "#appTitleBar";
-    private browserUrl = "https://safebrowsing.googleapis.com/v4/threatLists";
-    private manaUrl = "https://jsonplaceholder.typicode.com/todos/1";
     private fac = new ManaFactory();
-    private axiosInstance: AxiosInstance;
     private runningOnMana?: boolean;
 
-    constructor(axiosInstance: AxiosInstance = axios) {
-        this.axiosInstance = axiosInstance;
-    }
+    constructor() {}
 
     private ReloadPage() {
         console.log("Mana lib : ReloadPage");
@@ -24,52 +18,23 @@ export class ManaWallibFunc {
         return this.fac.GetManaLib();
     }
 
-    public SetRunOnDevice(fromWeb: boolean) {
-        console.log("Mana lib : SetRunOnDevice " + fromWeb);
+    public SetDeviceCheckpoint(fromWeb: boolean) {
+        console.log("Mana lib : SetDeviceCheckpoint fromweb is  " + fromWeb);
         if (this.runningOnMana == true) return;
         if (this.runningOnMana == false && fromWeb == false) {
             this.ReloadPage();
             return;
         };
         this.runningOnMana = !fromWeb;
-        this.fac.SetRunOnDevice(fromWeb);
+        this.fac.SetDeviceIsBrowser(fromWeb);
         if (fromWeb) {
             this.showContent();
         }
     }
 
-    public CheckPlatformByOnline() {
-        if (this.runningOnMana) return;
-        this.axiosInstance.get(this.browserUrl).catch(err => {
-            if (err.response && err.response.status == "403") {
-                console.log("BrowserCode : 403 This is *FromWeb*");
-                this.SetRunOnDevice(true);
-            } else {
-                if ((<any>window).TheSHybridFunc) {
-                    console.log("BrowserCode : 0 TheSHybridFunc : true This is *Mana*");
-                    this.SetRunOnDevice(false);
-                } else {
-                    if (this.runningOnMana) return;
-                    this.axiosInstance.get(this.manaUrl).then(res => {
-                        console.log("BrowserCode : 0 ManaCode : 200 This is *Mana*");
-                        this.SetRunOnDevice(false);
-                    }).catch(err => {
-                        setTimeout(() => {
-                            if ((<any>window).TheSHybridFunc) {
-                                console.log("BrowserCode : 0 ManaCode : 0 but Retry This is *Mana*");
-                                this.SetRunOnDevice(false);
-                            } else {
-                                console.log("BrowserCode : 0 ManaCode : 0 This is *No internet*");
-                                this.SetRunOnDevice(true);
-                            }
-                        }, 50);
-                    });
-                }
-            }
-        });
-    }
-
     public hideContent() {
+        console.log("hide content");
+
         var hideContentStyle = document.querySelector("style#app-hide-content");
 
         if (!hideContentStyle) {
@@ -83,6 +48,8 @@ export class ManaWallibFunc {
     }
 
     public showContent() {
+        console.log("show content");
+
         var hideContentStyle = document.querySelector("style#app-hide-content");
 
         if (hideContentStyle) {
