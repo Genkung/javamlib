@@ -3,6 +3,7 @@ test/*
 spec/*
 dist/webpack.*
 dist/src/*
+dist/test/*
 .vscode/*
 index.html
 tsconfig.json
