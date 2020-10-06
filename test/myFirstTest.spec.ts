@@ -15,7 +15,7 @@ describe("ManaFactory define device is mana or browser", () => {
         (<any>global).window.TheSHybridFunc = undefined;
     });
     
-    it('When SetRunOnDevice with true then GetManaLib it should be ManaRestService', async () => {
+    it('When SetDeviceIsBrowser with true then GetManaLib it should be ManaRestService', async () => {
         var fac = new ManaFactory();
         fac.SetDeviceIsBrowser(true);
         var lib = await fac.GetManaLib();
@@ -23,7 +23,7 @@ describe("ManaFactory define device is mana or browser", () => {
         expect(result).toBe("ManaRestService");
     })
     
-    it('When SetRunOnDevice with false then GetManaLib it should be ManaNativeService', async () => {
+    it('When SetDeviceIsBrowser with false then GetManaLib it should be ManaNativeService', async () => {
         (<any>global).window.TheSHybridFunc = true;
         var fac = new ManaFactory();
         fac.SetDeviceIsBrowser(false);
@@ -32,7 +32,7 @@ describe("ManaFactory define device is mana or browser", () => {
         expect(result).toBe("ManaNativeService");
     })
 
-    it('When set device run on Mana and set device run on browser again it device must be Mana', async () => {
+    it('When set device run on Mana and set device run on browser again device must be Mana', async () => {
         (<any>global).window.TheSHybridFunc = true;
         var manaFunc = new ManaWallibFunc();
         manaFunc.SetDeviceCheckpoint(false);
