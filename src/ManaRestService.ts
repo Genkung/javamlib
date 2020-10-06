@@ -12,10 +12,6 @@ export class ManaRestService implements ITheSManaLibProvider {
     private onSelectToolbar: (action: any) => void;
     private onOptionSelected: (response: any) => any;
 
-    getName(): string {
-        return "ManaRestService";
-    }
-
     private apiBase: string = "https://api-mana-from.azurewebsites.net";
     private apiUrls: Map<string, string> = new Map<string, string>();
 

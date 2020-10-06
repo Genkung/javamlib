@@ -42,8 +42,6 @@ export interface ITheSManaLibProvider {
     setGpsSection(address: string, latitude: string, longitude: string, phoneNumber: string, remark: string) : any;
 
     getGpsLocation(mcid:string) : Promise<any>
-
-    getName():string;
 }
 
 export class confirmMessage {

@@ -1,6 +1,8 @@
 import { ManaFactory } from '../src/ManaFactory';
 import { ManaWallibFunc } from '../src/ManaWallibFunc';
 import { JSDOM } from 'jsdom';
+import { ManaRestService } from '../src/ManaRestService';
+import { ManaNativeService } from '../src/ManaNativeService';
 
 const dom = new JSDOM("<!DOCTYPE html><html><head><script src='../src/theSjquery-slim.js'></script></head></html>", {
     url: "https://example.org/",
@@ -14,22 +16,20 @@ describe("ManaFactory define device is mana or browser", () => {
     afterEach(() => {
         (<any>global).window.TheSHybridFunc = undefined;
     });
-    
+
     it('When SetDeviceIsBrowser with true then GetManaLib it should be ManaRestService', async () => {
         var fac = new ManaFactory();
         fac.SetDeviceIsBrowser(true);
         var lib = await fac.GetManaLib();
-        var result = lib.getName();
-        expect(result).toBe("ManaRestService");
+        expect(lib.constructor.name).toBe(ManaRestService.name);
     })
-    
+
     it('When SetDeviceIsBrowser with false then GetManaLib it should be ManaNativeService', async () => {
         (<any>global).window.TheSHybridFunc = true;
         var fac = new ManaFactory();
         fac.SetDeviceIsBrowser(false);
         var lib = await fac.GetManaLib();
-        var result = lib.getName();
-        expect(result).toBe("ManaNativeService");
+        expect(lib.constructor.name).toBe(ManaNativeService.name);
     })
 
     it('When set device run on Mana and set device run on browser again device must be Mana', async () => {
@@ -38,8 +38,7 @@ describe("ManaFactory define device is mana or browser", () => {
         manaFunc.SetDeviceCheckpoint(false);
         manaFunc.SetDeviceCheckpoint(true);
         var lib = await manaFunc.GetLib();
-        var result = lib.getName();
-        expect(result).toBe("ManaNativeService");
+        expect(lib.constructor.name).toBe(ManaNativeService.name);
     })
 
     it('When set device run on browser and set device run on Mana it must be call reload page', () => {
