@@ -23,8 +23,18 @@
     <div class="card">
         <div class="card-body">
             <h3><b class="titleName"></b></h3>
-            <h4 id="SrunOn"></h4>
+            <h4 id="SrunOn">xxx</h4>
             <p id="Sdata">data</p>
+        </div>
+        <div class="form-group">
+            <label for="testLabel">ทดสอบ</label>
+            <input customInput class="form-control" id="testLabel" placeholder="test">
+            <label for="testLabel2">ทดสอบ2</label>
+            <input customInput class="form-control" id="testLabel2" placeholder="test2">
+            <label for="testLabel3">ทดสอบ3</label>
+            <input customInput class="form-control" id="testLabel2" placeholder="test3">
+            <label for="testLabel4">ทดสอบ4</label>
+            <input customInput class="form-control" id="testLabel2" placeholder="test4">
         </div>
     </div>
 
@@ -42,8 +52,8 @@
             await lib.initPageApiWithCallBack(mcontentId, () => callBackFunc());
             var result = await lib.getApiData(mcontentId);
             $("#Sdata").text(JSON.stringify(result));
-
-            // setTimeout(() => { refreshOnGoBack() }, 2000);
+            setTimeout(() => { refreshOnGoBack() }, 2000);
+            var x = $("#Sdata");
         });
     </script>
 

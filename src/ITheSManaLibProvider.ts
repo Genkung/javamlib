@@ -39,9 +39,11 @@ export interface ITheSManaLibProvider {
 
     initOptionDialog(mcid: string, fn: (param: any) => any): Promise<any>;
 
-    setGpsSection(address: string, latitude: string, longitude: string, phoneNumber: string, remark: string) : any;
+    setGpsSection(address: string, latitude: string, longitude: string, phoneNumber: string, remark: string): any;
 
-    getGpsLocation(mcid:string) : Promise<any>
+    getGpsLocation(mcid: string): Promise<any>
+
+    showCustomKeyboard(): Promise<any>
 }
 
 export class confirmMessage {

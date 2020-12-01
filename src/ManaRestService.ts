@@ -15,7 +15,7 @@ export class ManaRestService implements ITheSManaLibProvider {
     private apiBase: string = "https://api-mana-from.azurewebsites.net";
     private apiUrls: Map<string, string> = new Map<string, string>();
 
-    constructor(){
+    constructor() {
         (<any>window).refreshOnGoBack = () => { this.executeCallBackFunc() };
 
         (<any>window).OnStateChanged = (param: any) => { this.executeOnStateChanged(param) };
@@ -23,6 +23,10 @@ export class ManaRestService implements ITheSManaLibProvider {
         (<any>window).OnSelectToolbar = (action: any) => { this.excuteToolbarItemFunc(action) };
 
         (<any>window).onOptionSelected = (response: any) => { return this.excuteOnOptionSelected(response) };
+    }
+
+    showCustomKeyboard(): Promise<any> {
+        return new Promise<any>(() => { });
     }
 
     initPageApi(mcontentid: string): Promise<any> {
@@ -41,7 +45,7 @@ export class ManaRestService implements ITheSManaLibProvider {
 
     initPageApiWithCallBack(mcontentid: string, fn: () => void): Promise<any> {
         this.callBackFunc = fn;
-        
+
         return new Promise<any>((resolver, rejector) => {
             if (this.apiUrls.has(mcontentid)) {
                 resolver(this.apiUrls.get(mcontentid));
@@ -141,7 +145,7 @@ export class ManaRestService implements ITheSManaLibProvider {
     setGpsSection(address: string, latitude: string, longitude: string, phoneNumber: string, remark: string) {
         console.log("setGpsSection")
     }
-    getGpsLocation(mcid:string):Promise<any>{
+    getGpsLocation(mcid: string): Promise<any> {
         console.log("getGpsLocation")
         return new Promise<any>(() => { });
     }

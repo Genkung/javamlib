@@ -10,11 +10,11 @@ document.head.appendChild(scriptForBrowser);
 
 function TheSAppHybridFuncsReady(fromWeb = false) {
     console.log("Mana lib : TheSAppHybridFuncsReady fromweb is " + fromWeb);
-    if ((<any>window).TheSHybridFunc){ func.SetDeviceCheckpoint(false); return;};
+    if ((<any>window).TheSHybridFunc) { func.SetDeviceCheckpoint(false); return; };
     if (fromWeb) {
         setTimeout(() => {
             if (!(<any>window).TheSHybridFunc) {
-                if ((<any>window).TheSHybridFunc){ func.SetDeviceCheckpoint(false); return;};
+                if ((<any>window).TheSHybridFunc) { func.SetDeviceCheckpoint(false); return; };
                 func.SetDeviceCheckpoint(fromWeb);
             }
         }, 80);
@@ -26,7 +26,7 @@ import { ManaWallibFunc } from "./ManaWallibFunc";
 
 declare var The$: any;
 
-const titleTextId = "#appTitleText";
+(<any>window).The$ = The$;
 
 var func = new ManaWallibFunc();
 
@@ -35,6 +35,44 @@ func.hideContent();
 export function GetLib() {
     return func.GetLib();
 }
+
+var element: any;
+
+async function CustomKeyboardInputClicked() {
+    console.log("CustomKeyboardInputClicked");
+    element = The$(this);
+    var lib = await func.GetLib();
+    lib.showCustomKeyboard();
+}
+
+(<any>window).SetUpKeyboard = () => SetUpKeyboard();
+function SetUpKeyboard() {
+    console.log("SetUpKeyboard");
+    The$("*[customInput]").attr("readonly", true);
+    The$("*[customInput]").click(() => CustomKeyboardInputClicked());
+    The$("ion-input[customInput]").on("ionFocus", () => CustomKeyboardInputClicked());
+}
+
+(<any>window).SetText = (text: string) => SetText(text);
+function SetText(text: string) {
+    element.val(text);
+}
+
+(<any>window).GetCurrentInputText = () => GetCurrentInputText();
+function GetCurrentInputText() {
+    return element.val();
+}
+
+(<any>window).GetCurrnentInputLabel = () => GetCurrnentInputLabel();
+function GetCurrnentInputLabel() {
+    var labelForInput = The$("label[for='" + element.attr("id") + "']").text();
+    if (labelForInput == "") {
+        labelForInput = The$("ion-label[for='" + element.attr("id") + "']").text()
+    }
+    return labelForInput;
+}
+
+const titleTextId = "#appTitleText";
 
 export function GetCustomTitle() {
     var title = The$(titleTextId).text();

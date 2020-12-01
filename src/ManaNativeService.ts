@@ -19,6 +19,10 @@ export class ManaNativeService implements ITheSManaLibProvider {
         (<any>window).onOptionSelected = (response: any) => { return this.excuteOnOptionSelected(response) };
     }
 
+    showCustomKeyboard(): Promise<any> {
+        return this.callNativeFunc('showCustomKeyboard', "");
+    }
+
     initPageApi(mcontentid: string): Promise<any> {
         return this.callAppMethod('initPageApi', mcontentid);
     }
@@ -87,8 +91,8 @@ export class ManaNativeService implements ITheSManaLibProvider {
     setGpsSection(address: string, latitude: string, longitude: string, phoneNumber: string, remark: string) {
         this.callAppMethod('setGpsSection', JSON.stringify({ address: address, latitude: latitude, longitude: longitude, phoneNumber: phoneNumber, remark: remark }));
     }
-    getGpsLocation(mcid: string):Promise<any>{
-        return this.callNativeFunc('getGpsLocation', JSON.stringify({mcid: mcid}));
+    getGpsLocation(mcid: string): Promise<any> {
+        return this.callNativeFunc('getGpsLocation', JSON.stringify({ mcid: mcid }));
     }
 
     private callAppMethod(fName: string, fParam: any) {
