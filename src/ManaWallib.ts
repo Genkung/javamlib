@@ -49,8 +49,8 @@ async function CustomKeyboardInputClicked() {
 function SetUpKeyboard() {
     console.log("SetUpKeyboard");
     The$("*[customInput]").attr("readonly", true);
-    The$("*[customInput]").click(() => CustomKeyboardInputClicked());
-    The$("ion-input[customInput]").on("ionFocus", () => CustomKeyboardInputClicked());
+    The$("*[customInput]").click(CustomKeyboardInputClicked);
+    The$("ion-input[customInput]").on("ionFocus", CustomKeyboardInputClicked);
 }
 
 (<any>window).SetText = (text: string) => SetText(text);

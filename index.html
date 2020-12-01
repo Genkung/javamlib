@@ -28,7 +28,7 @@
         </div>
         <div class="form-group">
             <label for="testLabel">ทดสอบ</label>
-            <input customInput class="form-control" id="testLabel" placeholder="test">
+            <input customInput class="form-control" id="testLabel" placeholder="test" value="111">
             <label for="testLabel2">ทดสอบ2</label>
             <input customInput class="form-control" id="testLabel2" placeholder="test2">
             <label for="testLabel3">ทดสอบ3</label>
@@ -48,12 +48,12 @@
         var lib;
 
         $(document).ready(async function () {
-            lib = await manawallib.GetLib();
-            await lib.initPageApiWithCallBack(mcontentId, () => callBackFunc());
-            var result = await lib.getApiData(mcontentId);
-            $("#Sdata").text(JSON.stringify(result));
-            setTimeout(() => { refreshOnGoBack() }, 2000);
-            var x = $("#Sdata");
+            // lib = await manawallib.GetLib();
+            // await lib.initPageApiWithCallBack(mcontentId, () => callBackFunc());
+            // var result = await lib.getApiData(mcontentId);
+            // $("#Sdata").text(JSON.stringify(result));
+            // setTimeout(() => { refreshOnGoBack() }, 2000);
+            // var x = $("#Sdata");
         });
     </script>
 
