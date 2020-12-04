@@ -46,8 +46,12 @@ async function CustomKeyboardInputClicked() {
 }
 
 (<any>window).UnFocusCurrentInput = () => UnFocusCurrentInput();
-function UnFocusCurrentInput(){
-    element.blur();
+function UnFocusCurrentInput() {
+    var inputInIonInput = element.children("input");
+    if (inputInIonInput.length) {
+        inputInIonInput.blur();
+    }
+    else element.blur();
 }
 
 (<any>window).SetUpKeyboard = () => SetUpKeyboard();
