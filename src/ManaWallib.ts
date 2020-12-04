@@ -45,6 +45,11 @@ async function CustomKeyboardInputClicked() {
     lib.showCustomKeyboard();
 }
 
+(<any>window).UnFocusCurrentInput = () => UnFocusCurrentInput();
+function UnFocusCurrentInput(){
+    element.blur();
+}
+
 (<any>window).SetUpKeyboard = () => SetUpKeyboard();
 function SetUpKeyboard() {
     console.log("SetUpKeyboard");
