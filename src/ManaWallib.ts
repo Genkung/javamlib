@@ -41,8 +41,21 @@ var element: any;
 async function CustomKeyboardInputClicked() {
     console.log("CustomKeyboardInputClicked");
     element = The$(this);
+
     var lib = await func.GetLib();
     lib.showCustomKeyboard();
+}
+
+(<any>window).GetCurrentElementIsLast = () => GetCurrentElementIsLast();
+function GetCurrentElementIsLast(): boolean {
+    var allCustomkeyboard = The$("[customInput]");
+    var allInput = The$("input");
+
+    var isLastCustomkeyboard = The$(element).is(allCustomkeyboard.last());
+    var isLastIonInput = The$(element.children("input")).is(allInput.last());
+    var isLastInput = The$(element).is(allInput.last());
+
+    return isLastCustomkeyboard && (isLastIonInput || isLastInput);
 }
 
 (<any>window).UnFocusCurrentInput = () => UnFocusCurrentInput();
