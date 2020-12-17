@@ -142,7 +142,7 @@ export class ManaRestService implements ITheSManaLibProvider {
         this.onOptionSelected = fn;
         return new Promise<any>(() => { });
     }
-    setGpsSection(address: string, latitude: string, longitude: string, phoneNumber: string, remark: string) {
+    setGpsSection(title: string, realm: string, subDistrict: string, district: string, province: string, postalCode: string, accuracy: number, latitude: number, longitude: number, phoneNumber: string, remark: string) {
         console.log("setGpsSection")
     }
     getGpsLocation(mcid: string): Promise<any> {

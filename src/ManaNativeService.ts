@@ -88,8 +88,8 @@ export class ManaNativeService implements ITheSManaLibProvider {
         this.onOptionSelected = fn;
         return this.callNativeFunc('initOptionDialog', JSON.stringify({ mcid: mcid }));
     }
-    setGpsSection(address: string, latitude: string, longitude: string, phoneNumber: string, remark: string) {
-        this.callAppMethod('setGpsSection', JSON.stringify({ address: address, latitude: latitude, longitude: longitude, phoneNumber: phoneNumber, remark: remark }));
+    setGpsSection(title: string, realm: string, subDistrict: string, district: string, province: string, postalCode: string, accuracy: number, latitude: number, longitude: number, phoneNumber: string, remark: string) {
+        this.callAppMethod('setGpsSection', JSON.stringify({ title: title, realm: realm, subDistrict: subDistrict, district: district, province: province, postalCode: postalCode, accuracy: accuracy, geolocation: { latitude: latitude, longitude: longitude }, phoneNumber: phoneNumber, remark: remark }));
     }
     getGpsLocation(mcid: string): Promise<any> {
         return this.callNativeFunc('getGpsLocation', JSON.stringify({ mcid: mcid }));

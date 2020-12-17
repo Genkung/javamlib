@@ -39,7 +39,7 @@ export interface ITheSManaLibProvider {
 
     initOptionDialog(mcid: string, fn: (param: any) => any): Promise<any>;
 
-    setGpsSection(address: string, latitude: string, longitude: string, phoneNumber: string, remark: string): any;
+    setGpsSection(title: string, realm: string, subDistrict: string, district: string, province: string, postalCode: string, accuracy: number, latitude: number, longitude: number, phoneNumber: string, remark: string): any;
 
     getGpsLocation(mcid: string): Promise<any>
 
