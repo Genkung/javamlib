@@ -1,6 +1,6 @@
 {
   "name": "java-m-lib",
-  "version": "0.0.31",
+  "version": "0.0.32",
   "description": "",
   "main": "dist/bundle.js",
   "author": "misixonesto",
