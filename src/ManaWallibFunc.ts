@@ -1,3 +1,4 @@
+import { MonetaryValue } from "./ITheSManaLibProvider";
 import { ManaFactory } from "./ManaFactory";
 
 declare var The$: any;
@@ -16,6 +17,11 @@ export class ManaWallibFunc {
 
     public GetLib() {
         return this.fac.GetManaLib();
+    }
+
+    public GetDisplayCurrencyAmount(monetary: MonetaryValue): number {
+        var amountUnit = (monetary && monetary.amountUnit) ? monetary.amountUnit:0;
+        return amountUnit / 1000;
     }
 
     public SetDeviceCheckpoint(fromWeb: boolean) {

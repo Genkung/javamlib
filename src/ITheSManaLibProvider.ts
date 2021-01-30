@@ -58,3 +58,9 @@ export class confirmMessage {
         this.cancelText = cancelText;
     }
 }
+
+export interface MonetaryValue
+{
+    currency:string;
+    amount:number;
+}
