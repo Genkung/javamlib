@@ -20,7 +20,7 @@ export class ManaWallibFunc {
     }
 
     public GetDisplayCurrencyAmount(monetary: MonetaryValue): number {
-        var amountUnit = (monetary && monetary.amount) ? monetary.amount:0;
+        var amountUnit = (monetary && monetary.amountUnit) ? monetary.amountUnit:0;
         return amountUnit / 1000;
     }
 

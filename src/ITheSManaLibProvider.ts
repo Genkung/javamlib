@@ -62,5 +62,5 @@ export class confirmMessage {
 export interface MonetaryValue
 {
     currency:string;
-    amount:number;
+    amountUnit:number;
 }
