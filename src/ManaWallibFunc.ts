@@ -8,7 +8,7 @@ export class ManaWallibFunc {
     private fac = new ManaFactory();
     private runningOnMana?: boolean;
 
-    constructor() {}
+    constructor() { }
 
     private ReloadPage() {
         console.log("Mana lib : ReloadPage");
@@ -19,9 +19,33 @@ export class ManaWallibFunc {
         return this.fac.GetManaLib();
     }
 
-    public GetDisplayCurrencyAmount(monetary: MonetaryValue): number {
-        var amountUnit = (monetary && monetary.amountUnit) ? monetary.amountUnit:0;
-        return amountUnit / 1000;
+    private CompileToMonetaryValue(object: any): MonetaryValue {
+        var isMonetaryValue = Object.keys(object).includes("currency") && Object.keys(object).includes("amountUnit");
+        if (isMonetaryValue) return object;
+
+        var result: MonetaryValue[] = [];
+        Object.keys(object).forEach(it => {
+            var mon: MonetaryValue = { currency: "", amountUnit: 0 };
+            mon.currency = it;
+            mon.amountUnit = object[it];
+            result.push(mon);
+        });
+        return result[0];
+    }
+
+    public GetMonetaryDisplayAmount(monetary: MonetaryValue): number {
+        return this.CompileToMonetaryValue(monetary).amountUnit / 1000;
+    }
+
+    public GetMonetaryDisplayCurrencyAmount(monetary: MonetaryValue): string {
+        var convertedMonetary = this.CompileToMonetaryValue(monetary);
+        return convertedMonetary.currency + " " + (convertedMonetary.amountUnit/1000).toString();
+    }
+
+    public GetMonetaryObject(monetary: MonetaryValue): MonetaryValue {
+        var convertedMonetary = this.CompileToMonetaryValue(monetary);
+        convertedMonetary.amountUnit = convertedMonetary.amountUnit/1000;
+        return this.CompileToMonetaryValue(convertedMonetary);
     }
 
     public SetDeviceCheckpoint(fromWeb: boolean) {
