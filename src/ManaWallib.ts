@@ -37,19 +37,19 @@ export function GetLib() {
     return func.GetLib();
 }
 
-export function GetMonetaryDisplayAmount(monetary: MonetaryValue)
+export function GetAmount(monetary: MonetaryValue)
 {
-    return func.GetMonetaryDisplayAmount(monetary);
+    return func.GetAmount(monetary);
 }
 
-export function GetMonetaryDisplayCurrencyAmount(monetary: MonetaryValue)
+export function GetCurrency(monetary: MonetaryValue)
 {
-    return func.GetMonetaryDisplayCurrencyAmount(monetary);
+    return func.GetCurrency(monetary);
 }
 
-export function GetMonetaryObject(monetary: MonetaryValue)
+export function GetDisplay(monetary: MonetaryValue)
 {
-    return func.GetMonetaryObject(monetary);
+    return func.GetDisplay(monetary);
 }
 
 var element: any;

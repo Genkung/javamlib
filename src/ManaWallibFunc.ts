@@ -19,33 +19,28 @@ export class ManaWallibFunc {
         return this.fac.GetManaLib();
     }
 
-    private CompileToMonetaryValue(object: any): MonetaryValue {
+    private ConvertObjToMonetaryValue(object: any): MonetaryValue {
         var isMonetaryValue = Object.keys(object).includes("currency") && Object.keys(object).includes("amountUnit");
         if (isMonetaryValue) return object;
 
-        var result: MonetaryValue[] = [];
-        Object.keys(object).forEach(it => {
-            var mon: MonetaryValue = { currency: "", amountUnit: 0 };
-            mon.currency = it;
-            mon.amountUnit = object[it];
-            result.push(mon);
-        });
-        return result[0];
+        var mon: MonetaryValue = { currency: "", amountUnit: 0 };
+        mon.currency = Object.keys(object)[0];
+        mon.amountUnit = object[Object.keys(object)[0]];
+
+        return mon;
     }
 
-    public GetMonetaryDisplayAmount(monetary: MonetaryValue): number {
-        return this.CompileToMonetaryValue(monetary).amountUnit / 1000;
+    public GetAmount(monetary: MonetaryValue): number {
+        return this.ConvertObjToMonetaryValue(monetary).amountUnit / 1000;
     }
 
-    public GetMonetaryDisplayCurrencyAmount(monetary: MonetaryValue): string {
-        var convertedMonetary = this.CompileToMonetaryValue(monetary);
+    public GetCurrency(monetary: MonetaryValue): string {
+        return this.ConvertObjToMonetaryValue(monetary).currency;
+    }
+
+    public GetDisplay(monetary: MonetaryValue): string {
+        var convertedMonetary = this.ConvertObjToMonetaryValue(monetary);
         return convertedMonetary.currency + " " + (convertedMonetary.amountUnit/1000).toString();
-    }
-
-    public GetMonetaryObject(monetary: MonetaryValue): MonetaryValue {
-        var convertedMonetary = this.CompileToMonetaryValue(monetary);
-        convertedMonetary.amountUnit = convertedMonetary.amountUnit/1000;
-        return this.CompileToMonetaryValue(convertedMonetary);
     }
 
     public SetDeviceCheckpoint(fromWeb: boolean) {
