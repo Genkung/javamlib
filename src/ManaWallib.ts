@@ -47,9 +47,9 @@ export function GetCurrency(monetary: MonetaryValue)
     return func.GetCurrency(monetary);
 }
 
-export function GetDisplay(monetary: MonetaryValue)
+export function GetMonetaryDisplay(monetary: MonetaryValue)
 {
-    return func.GetDisplay(monetary);
+    return func.GetMonetaryDisplay(monetary);
 }
 
 var element: any;

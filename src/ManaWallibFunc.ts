@@ -38,7 +38,7 @@ export class ManaWallibFunc {
         return this.ConvertObjToMonetaryValue(monetary).currency;
     }
 
-    public GetDisplay(monetary: MonetaryValue): string {
+    public GetMonetaryDisplay(monetary: MonetaryValue): string {
         var convertedMonetary = this.ConvertObjToMonetaryValue(monetary);
         return convertedMonetary.currency + " " + (convertedMonetary.amountUnit/1000).toString();
     }
