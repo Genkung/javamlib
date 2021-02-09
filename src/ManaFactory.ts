@@ -44,7 +44,7 @@ export class ManaFactory {
             if (typeof (<any>window).TheSHybridFunc == "undefined" || !((<any>window).TheSHybridFunc)) {
                 rejector("TheSHybridFunc is null or undefined");
             } else {
-                resolver();
+                resolver("");
             }
         });
     }

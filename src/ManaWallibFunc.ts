@@ -1,4 +1,4 @@
-import { MonetaryValue } from "./ITheSManaLibProvider";
+import { ITheSManaLibProvider, MonetaryValue } from "./ITheSManaLibProvider";
 import { ManaFactory } from "./ManaFactory";
 
 declare var The$: any;
@@ -15,7 +15,7 @@ export class ManaWallibFunc {
         window.location.reload();
     };
 
-    public GetLib() {
+    public GetLib(): Promise<ITheSManaLibProvider> {
         return this.fac.GetManaLib();
     }
 

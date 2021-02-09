@@ -22,7 +22,7 @@ function TheSAppHybridFuncsReady(fromWeb = false) {
     else func.SetDeviceCheckpoint(fromWeb);
 }
 
-import { MonetaryValue } from "./ITheSManaLibProvider";
+import { ITheSManaLibProvider, MonetaryValue } from "./ITheSManaLibProvider";
 import { ManaWallibFunc } from "./ManaWallibFunc";
 
 declare var The$: any;
@@ -33,21 +33,21 @@ var func = new ManaWallibFunc();
 
 func.hideContent();
 
-export function GetLib() {
+export function GetLib(): Promise<ITheSManaLibProvider> {
     return func.GetLib();
 }
 
-export function GetAmount(monetary: MonetaryValue)
+export function GetAmount(monetary: MonetaryValue): number
 {
     return func.GetAmount(monetary);
 }
 
-export function GetCurrency(monetary: MonetaryValue)
+export function GetCurrency(monetary: MonetaryValue): string
 {
     return func.GetCurrency(monetary);
 }
 
-export function GetMonetaryDisplay(monetary: MonetaryValue)
+export function GetMonetaryDisplay(monetary: MonetaryValue): string
 {
     return func.GetMonetaryDisplay(monetary);
 }
